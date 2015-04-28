@@ -1,0 +1,269 @@
+# Stop on errors
+
+set -e
+
+
+# Show commands for debugging
+
+#set -x
+
+
+# Pre-processing
+
+makeResultDirectory () {
+	
+	resultPath="$1"
+	
+	test -d $resultPath || mkdir -p $resultPath
+	
+}
+
+
+# Page functions
+
+gallery_list_path="${basestart}/gallery/list.json"
+
+website_categories="
+biography|Biography
+resume|Resum&eacute;
+gallery|Gallery
+contact|Contact
+"
+
+
+meta () {
+	
+cat << '_Code_'
+<title>Example</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="description" content="This is an example website." />
+
+<meta name="tags" content="example,website,builder" />
+_Code_
+	
+}
+
+pageTitle () {
+	
+	homeLink="$1"
+	
+	cat << __HTML__
+		<h1>
+			
+			<a href="${homeLink}">Example</a>
+			
+			<div>Epic tagline.</div>
+			
+		</h1>
+__HTML__
+	
+}
+
+pageCategories () {
+	
+	URLPrefix="$1"
+	
+	here="$2"
+	
+	URLSuffix="/"
+	
+	echo "<div id=\"menu\">"
+	
+	echo "$website_categories" \
+	| grep '[^|]|[^|]' \
+	| {
+		
+		while read item
+		
+		do
+			
+			category=$( echo "$item" | awk 'BEGIN { FS = "|" } { print $1 }' )
+			
+			name=$( echo "$item" | awk 'BEGIN { FS = "|" } { print $2 }' )
+			
+			pageCategory "$category" "$name" "$here" "$URLPrefix"
+			
+		done
+		
+	}
+	
+	echo "</div>"
+	
+	echo ""
+	
+}
+
+pageCategory () {
+	
+	category="$1"
+	
+	name="$2"
+	
+	here="$3"
+	
+	URLPrefix="$4"
+	
+	URLSuffix="/"
+	
+	url="${URLPrefix}${category}${URLSuffix}"
+	
+	hereClass=""
+	
+	
+	if [ "$here" = "$category" ]
+	
+	then
+		
+		hereClass=" class=\"here\""
+		
+	fi
+	
+	
+	echo "<a href=\"${url}\"${hereClass}>${name}</a>"
+	
+}
+
+getJSONProperty () {
+	
+	file="$1";
+	
+	objectPath="$2";
+	
+	node -e "var json = require ( '$file' ); console.log ( $objectPath );"
+	
+}
+
+getGalleryItemProperty () {
+	
+	itemName="$1"
+	
+	propertyName="$2"
+	
+	getJSONProperty "$gallery_list_path" "json.items [ '$itemName' ].$propertyName"
+	
+}
+
+getGalleryList () {
+	
+	listName="$1"
+	
+	node -e "var json = require ( '$gallery_list_path' ); console.log ( json.lists [ '$listName' ].items.join ( '\n' ) );"
+	
+}
+
+GetGalleryItem () {
+	
+	itemName="$1"
+	
+	node -e "
+		
+		var list = require ( '$gallery_list_path' );
+		
+		var itemName = '$itemName';
+		
+		var shellSafeItemName = itemName.replace ( /[ ]+/g, '_' );
+		
+		var item = list.items [ itemName ];
+		
+		for ( var property in item ) {
+			
+			var value = item [ property ].replace ( /\"/g, '\\\\\"' );
+			
+			console.log ( 'gallery_item_' + shellSafeItemName + '_' + property + '=\"' + value + '\"' );
+			
+		}
+		
+	"
+	
+}
+
+GetGalleryList () {
+	
+	listName="$1"
+	
+	node -e "
+		
+		var list = require ( '$gallery_list_path' );
+		
+		var specificList = list.lists [ \"$listName\" ];
+		
+		console.log ( specificList.join ( \"\\n\" ) );
+		
+	"
+	
+}
+
+GoogleAnalytics () {
+	
+	# Google's tracking code!
+	
+cat << '_Code_'
+<script>
+  /*
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', '[Insert GA ID here]', 'auto');
+  ga('send', 'pageview');
+  */
+</script>
+_Code_
+	
+	# End of the code.
+	
+}
+
+
+# Post-processing functions
+
+saveAs () {
+	
+	path="$1"
+	
+	#cat >> $path
+	
+	cat \
+	| removeTabs \
+	| removeNewlines \
+	>> $path
+	
+	makeGzipVersion "$path"
+	
+	echo "$path"
+	
+}
+
+removeTabs () {
+	
+	sed 's@\t@@g'
+	
+}
+
+removeNewlines () {
+	
+	tr -d "\n" \
+	| tr -d "\r"
+	
+}
+
+removeMultilineCSSAndJSComments () {
+	
+	# Removes too much
+	
+	sed -r 's@\/\*.*\*\/@@'
+	
+}
+
+makeGzipVersion () {
+	
+	path="$1"
+	
+	cat $path \
+	| gzip --stdout --best \
+	> $path.gz
+	
+}

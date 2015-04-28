@@ -1,0 +1,134 @@
+# Stop on errors
+
+set -e
+
+
+# Set up the little framework
+
+basestart="../"
+
+. ${basestart}/base.build_helpers
+
+
+makeResultDirectory "$resultPath"
+
+
+# Save file content
+
+saveAs "$resultPath/$resultName" << __HTML__
+<!doctype html>
+
+<html>
+	
+	<head>
+		
+		$(meta)
+		
+		<style>
+			
+			$( cat ${basestart}/css/base.css )
+			
+			$( cat ${basestart}/css/resume-page.css )
+			
+			$( cat ${basestart}/css/mobile.css )
+			
+		</style>
+		
+	</head>
+	
+	<body>
+		
+		$( pageTitle "../" )
+		
+		$( pageCategories "../" "resume" )
+		
+		<table>
+			
+			<tr>
+				
+				<td colspan="2">
+					
+					<h3>Bio</h3>
+					
+				</td>
+				
+			</tr>
+			
+			<tr>
+				
+				<td colspan="2" class="full">November 7, 1987, Exemplary, EX; lives and works in Exampleville</td>
+				
+			</tr>
+			
+			<tr>
+				
+				<td colspan="2">
+					
+					<h3>Education</h3>
+					
+				</td>
+				
+			</tr>
+			
+			<tr>
+				
+				<td>2007</td>
+				
+				<td>Masters of Awesome, Awesome University, Portland, Oregon</td>
+				
+			</tr>
+
+			<tr>
+				
+				<td>2004</td>
+				
+				<td>Bachelor of Arts, College of Art, Somewhere, Colorado</td>
+				
+			</tr>
+
+			<tr><td colspan="2"><h3>Solo Exhibitions</h3></td></tr>
+
+			<tr>
+				<td>2015</td>
+				<td>Awesome Show, Awesome City, Awesome State</td>
+			</tr>
+
+			<tr><td colspan="2"><h3>Group Exhibitions</h3></td></tr>
+			
+			<tr>
+				<td>2015</td>
+				<td>Sweet Library Exhibit, March 21 - May 16, Nice Library, Pretty Cool Place, Awesome State</td>
+			</tr>
+			
+			<tr>
+				<td></td>
+				<td>#TwittersMostAwesomeExhibit: Most Epic, Epic Place, Epic, Norway</td>
+			</tr>
+			
+			<tr>
+				<td>2011</td>
+				<td>Small Works Exhibit, Epic Arts Center, Laurels, State of Cool</td>
+			</tr>
+
+			<tr>
+				<td>2004</td>
+				<td>School, Spring County, Awesome</td>
+			</tr>
+
+			<tr><td colspan="2"><h3>Bodies of Work</h3></td></tr>
+			
+			<tr>
+				<td>2007 - 08</td>
+				<td>
+					<i>A Painting a Day</i>, oil on canvas board
+				</td>
+			</tr>
+			
+		</table>
+		
+		$(GoogleAnalytics)
+		
+	</body>
+	
+</html>
+__HTML__

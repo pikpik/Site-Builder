@@ -1,0 +1,27 @@
+label {
+	
+	display: block;
+	
+	width: 80%;
+	
+	margin-bottom: 1.5em;
+	
+	text-align: right;
+	
+	font-weight: bold;
+	
+}
+
+label a {
+	
+	float: right;
+	
+	width: 50%;
+	
+	text-align: left;
+	
+	margin-left: 1em;
+	
+	font-weight: normal;
+	
+}

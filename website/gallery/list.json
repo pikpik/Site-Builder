@@ -1,0 +1,95 @@
+{
+	
+	"lists": {
+		
+		"all": {
+			
+			"name": "All items",
+			
+			"coverItem": "Cloudscape",
+			
+			"items": [
+				
+				"Cloudscape",
+				
+				"Rain_in_the_Valley",
+				
+				"Oranges_in_Sunset",
+				
+				"Tea_for_Two"
+				
+			]
+			
+		},
+		
+		"landscapes": {
+			
+			"name": "Landscapes",
+			
+			"coverItem": "Cloudscape",
+			
+			"items": [
+				
+				"Cloudscape",
+				
+				"Rain_in_the_Valley"
+				
+			]
+			
+		},
+		
+		"still_lives": {
+			
+			"name": "Still Lives",
+			
+			"coverItem": "Oranges_in_Sunset",
+			
+			"items": [
+				
+				"Oranges_in_Sunset",
+				
+				"Tea_for_Two"
+				
+			]
+			
+		}
+		
+	},
+	
+	"items": {
+		
+		"Cloudscape": {
+			"filename": "Cloudscape.jpg",
+			"title": "Cloudscape",
+			"size": "36&quot; x 48&quot;",
+			"medium": "Supercoolness",
+			"date": "2010"
+		},
+		
+		"Rain_in_the_Valley": {
+			"filename": "Rain_in_the_Valley.jpg",
+			"title": "Rain in the Valley",
+			"size": "11&quot; x 14&quot;",
+			"medium": "Supercalifragilisticexpealidocious",
+			"date": "2010"
+		},
+		
+		"Oranges_in_Sunset": {
+			"filename": "Oranges_in_Sunset.jpg",
+			"title": "Oranges in Sunset",
+			"size": "36&quot; x 48&quot;",
+			"medium": "Awesome on canvas",
+			"date": "2008"
+		},
+		
+		"Tea_for_Two": {
+			"filename": "Tea_for_Two.jpg",
+			"title": "Tea for Two",
+			"size": "16&quot; x 20&quot;",
+			"medium": "Amazingness",
+			"date": "2009"
+		}
+		
+	}
+	
+}

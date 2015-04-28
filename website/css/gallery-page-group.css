@@ -1,0 +1,149 @@
+body {
+	
+	background-color: #65704F;
+	
+}
+
+.back {
+	
+	position: absolute;
+	
+	left: 2em;
+	
+	font-size: 0.65em;
+	
+	color: #c0b332;
+	
+	display: block;
+	
+	top: 0.3em;
+	
+}
+
+.back:hover {
+	
+	text-decoration: underline;
+	
+}
+
+.back, .small {
+	
+	background-color: inherit;
+	
+	color: #303030;
+	
+	font-style: italic;
+	
+	font-weight: 100;
+	
+	font-variant: normal;
+	
+	text-decoration: none;
+	
+	font-size: 18pt;
+	
+}
+
+.back:hover, .small:hover {
+	
+	text-decoration: none;
+	
+}
+
+.small:hover .title {
+	
+	text-decoration: underline;
+	
+}
+
+.small img {
+	
+	display: block;
+	
+	margin: auto;
+	
+	border: 1px solid black;
+	
+}
+
+.groupName {
+	
+	position: relative;
+	
+	text-align: center;
+	
+	margin-top: 0.45em;
+	
+	margin-bottom: 0.85em;
+	
+	color: #1A1A1A;
+	
+	font-weight: normal;
+	
+	font-style: italic;
+	
+}
+
+.small {
+	
+	display: inline-block;
+	
+	width: 10em;
+	
+	height: 10em;
+	
+	margin-top: 0.5em;
+	
+	margin-left: 0.75em;
+	
+}
+
+.small .image-holder {
+	
+	position: relative;
+	
+	width: 100%;
+	
+	height: 80%;
+	
+}
+
+.small .image-holder img {
+	
+	max-width: 90%;
+	
+	max-height: 90%;
+	
+	top: 0;
+	
+	left: 0;
+	
+	right: 0;
+	
+	bottom: 0;
+	
+	position: absolute;
+	
+}
+
+.small span {
+	
+	margin-top: 0.125em;
+	
+	text-align: center;
+	
+	font-size: 0.65em;
+	
+	color: #363636;
+	
+	display: block;
+	
+}
+
+.small .size {
+	
+	font-size: 0.55em;
+	
+	margin-top: 0.1em;
+	
+}

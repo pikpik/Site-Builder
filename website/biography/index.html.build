@@ -1,0 +1,56 @@
+# Stop on errors
+
+set -e
+
+
+# Set up the little framework
+
+basestart="../"
+
+. ${basestart}/base.build_helpers
+
+
+makeResultDirectory "$resultPath"
+
+
+# Save file content
+
+saveAs "$resultPath/$resultName" << __HTML__
+<!doctype html>
+
+<html>
+	
+	<head>
+		
+		$(meta)
+		
+		<style>
+			
+			$( cat ${basestart}/css/base.css )
+			
+			$( cat ${basestart}/css/biography-page.css )
+			
+			$( cat ${basestart}/css/mobile.css )
+			
+		</style>
+		
+	</head>
+	
+	<body>
+		
+		$( pageTitle "../" )
+		
+		$( pageCategories "../" "biography" )
+		
+		<p>Growing up in an artistic family, Example was artistically inspired from a young age.</p>
+		
+		<p>When Example was infected by the world of color, there was only one hope: to paint.</p>
+		
+		<p>Example invites you to join them on their journey through this vibrant world.</p>
+		
+		$(GoogleAnalytics)
+		
+	</body>
+	
+</html>
+__HTML__

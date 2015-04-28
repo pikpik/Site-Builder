@@ -1,0 +1,331 @@
+# Stop on errors
+
+set -e
+
+
+# Set up the little framework
+
+basestart="../"
+
+. ${basestart}/base.build_helpers
+
+makeResultDirectory "$resultPath"
+
+
+# Gallery functionality
+
+multiGroupTemplate () {
+	
+	pagePath="$1"
+	
+	listNames="$2"
+	
+	
+	saveAs "$pagePath" << __HTML__
+<!doctype html>
+
+<html>
+	
+	<head>
+		
+		$( meta )
+		
+		<style>
+			
+			$( cat ${basestart}/css/base.css )
+			
+			$( cat ${basestart}/css/gallery-page-groups.css )
+			
+			$( cat ${basestart}/css/mobile.css )
+			
+		</style>
+		
+	</head>
+	
+	<body>
+		
+		$( pageTitle "../" )
+		
+		$( pageCategories "../" "gallery" )
+		
+		<a href="${backURL}" class="back">${backURL}</a>
+		
+		$(
+			
+			for listName in $( echo "$listNames" | tr " " "\n" )
+			
+			do
+				
+				multiGroupTemplateItem "$listName"
+				
+			done
+			
+		)
+		
+		$( GoogleAnalytics )
+		
+	</body>
+	
+</html>
+__HTML__
+	
+}
+
+multiGroupTemplateItem () {
+	
+	listName="$1"
+	
+	
+	groupName=$( getJSONProperty "$gallery_list_path" "json.lists [ '$listName' ].name" )
+	
+	coverItemName=$( getJSONProperty "$gallery_list_path" "json.lists [ '$listName' ].coverItem" )
+	
+	coverItemFilename=$( getJSONProperty "$gallery_list_path" "json.items [ '$coverItemName' ].filename" )
+	
+	
+	cat << __HTML__
+		
+		<a href="${listName}.html" class="group">
+			
+			<div class="image-holder">
+				
+				<img src="images/large/${coverItemFilename}" />
+				
+			</div>
+			
+			<span class="title">${groupName}</span>
+			
+		</a>
+		
+__HTML__
+
+}
+
+groupTemplate () {
+	
+	backURL="$1"
+	
+	backName="$2"
+	
+	pagePath="$3"
+	
+	listName="$4"
+	
+	
+	groupName=$( getJSONProperty "$gallery_list_path" "json.lists [ '$listName' ].name" )
+	
+	
+	saveAs "$pagePath" << __HTML__
+<!doctype html>
+
+<html>
+	
+	<head>
+		
+		$( meta )
+		
+		<style>
+			
+			$( cat ${basestart}/css/base.css )
+			
+			$( cat ${basestart}/css/gallery-page-group.css )
+			
+			$( cat ${basestart}/css/mobile.css )
+			
+		</style>
+		
+	</head>
+	
+	<body>
+		
+		$( pageTitle "../" )
+		
+		$( pageCategories "../" "gallery" )
+		
+		<h2 class="groupName">
+			
+			${groupName}
+			
+			<!-- <a href="${backURL}" class="back">${backName}</a> -->
+			
+		</h2>
+		
+		$( getGalleryList "$listName" | groupTemplateItems "$listName" )
+		
+		$( GoogleAnalytics )
+		
+	</body>
+	
+</html>
+__HTML__
+	
+}
+
+groupTemplateItems () {
+	
+	galleryName="$1"
+	
+	while read itemName
+	
+	do
+		
+		groupTemplateItem "$galleryName" "$itemName"
+		
+	done
+	
+}
+
+groupTemplateItem () {
+	
+	galleryName="$1"
+	
+	itemName="$2"
+	
+	
+	itemFilename=$( getGalleryItemProperty "$itemName" "filename" )
+	
+	itemTitle=$( getGalleryItemProperty "$itemName" "title" )
+	
+	itemSize=$( getGalleryItemProperty "$itemName" "size" )
+	
+	
+	[ "$itemTitle" = "undefined" -o "$itemTitle" = "" ] && itemTitle="&nbsp;"
+	
+	[ "$itemSize" = "undefined" -o "$itemSize" = "" ] && itemSize="&nbsp;"
+	
+	
+	cat << __HTML__
+		
+		<a href="${galleryName}_${itemName}.html" class="small">
+			
+			<div class="image-holder">
+				
+				<img src="images/large/${itemFilename}" />
+				
+			</div>
+			
+			<span class="title">${itemTitle}</span>
+			
+			<span class="size">${itemSize}</span>
+			
+		</a>
+		
+__HTML__
+
+}
+
+groupItemTemplates () {
+	
+	backURL="$1"
+	
+	resultPath="$2"
+	
+	galleryName="$3"
+	
+	
+	getGalleryList "$galleryName" | {
+		
+		while read itemName
+		
+		do
+			
+			groupItemTemplate "$backURL" "$resultPath" "$galleryName" "$itemName"
+			
+		done
+		
+	}
+	
+}
+
+groupItemTemplate () {
+	
+	backURL="$1"
+	
+	resultPath="$2"
+	
+	galleryName="$3"
+	
+	itemName="$4"
+	
+	
+	itemFilename=$( getGalleryItemProperty "$itemName" "filename" )
+	
+	itemTitle=$( getGalleryItemProperty "$itemName" "title" )
+	
+	itemSize=$( getGalleryItemProperty "$itemName" "size" )
+	
+	itemMedium=$( getGalleryItemProperty "$itemName" "medium" )
+	
+	
+	descriptionJoiner=""
+	
+	[ "$itemSize" != "" -a "$itemMedium" != "" ] && descriptionJoiner=", "
+	
+	
+	saveAs "${resultPath}/${galleryName}_${itemName}.html" << __HTML__
+<!doctype html>
+
+<html>
+	
+	<head>
+		
+		$( meta )
+		
+		<style>
+			
+			$( cat ${basestart}/css/base.css )
+			
+			$( cat ${basestart}/css/gallery-page-item.css )
+			
+			$( cat ${basestart}/css/mobile.css )
+			
+		</style>
+		
+	</head>
+	
+	<body>
+		
+		$( pageTitle "../" )
+		
+		$( pageCategories "../" "gallery" )
+		
+		<a href="${backURL}" class="large">
+			
+			<img src="images/large/${itemFilename}" />
+			
+			<i class="title">${itemTitle}</i><br />
+			
+			<span>${itemSize}${descriptionJoiner}${itemMedium}</span>
+			
+		</a>
+		
+		$( GoogleAnalytics )
+		
+	</body>
+	
+</html>
+__HTML__
+	
+}
+
+
+# Generate gallery pages
+
+
+# Listing of groups
+
+multiGroupTemplate "$resultPath/index.html" "landscapes still_lives"
+
+
+# Landscapes
+
+groupTemplate "../gallery/" "Back to Gallery" "$resultPath/landscapes.html" "landscapes"
+
+groupItemTemplates "landscapes.html" "$resultPath" "landscapes"
+
+
+# Still lives
+
+groupTemplate "../gallery/" "Back to Gallery" "$resultPath/still_lives.html" "still_lives"
+
+groupItemTemplates "still_lives.html" "$resultPath" "still_lives"

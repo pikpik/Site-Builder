@@ -1,0 +1,88 @@
+set -e
+
+test -d $resultPath || mkdir $resultPath
+
+
+# Copy the blog
+
+# If there were one, this would copy it verbatim.
+
+#cp -r blog $resultPath/blog
+
+#echo blog
+
+
+# Copy everything else
+
+pathsToCopy="
+.htaccess
+biography
+contact
+css
+gallery
+js
+resume
+"
+
+{
+	for path in $pathsToCopy
+	
+	do
+		
+		find $path
+		
+	done
+	
+} \
+| grep -v '\.build$' \
+| grep -v '\.build_helpers$' \
+| {
+	
+	while read pathToCopy
+	
+	do
+		
+		echo $pathToCopy
+		
+		
+		# Make parent directories
+		
+		parentDirectory=`dirname "$pathToCopy"`
+		
+		resultDirectoryPath="$resultPath/$parentDirectory"
+		
+		test -d "$resultDirectoryPath" || mkdir -p "$resultDirectoryPath"
+		
+		
+		# Copy files and folders
+		
+		if [ -d "$pathToCopy" ]
+		
+		then
+			
+			test -d "$resultPath/$pathToCopy" || mkdir -p "$resultPath/$pathToCopy"
+			
+		else
+			
+			cp "$pathToCopy" "$resultPath/$pathToCopy"
+			
+		fi
+		
+		
+		# Can we compress it?
+		
+		if [ $( echo "$pathToCopy" | grep -P '(\.html|\.js|\.css|\.png|\.jpg)$' | wc -l ) -gt 0 ]
+		
+		then
+			
+			echo "$pathToCopy.gz"
+			
+			cat "$resultPath/$pathToCopy" \
+			| gzip --stdout --best \
+			> "$resultPath/$pathToCopy.gz"
+			
+		fi
+		
+	done
+	
+}

@@ -1,0 +1,117 @@
+body {
+	
+	background-color: #65704F;
+	
+}
+
+.back {
+	
+	position: absolute;
+	
+	left: 2em;
+	
+	font-size: 0.65em;
+	
+	color: #c0b332;
+	
+	display: block;
+	
+	top: 0.3em;
+	
+}
+
+.back:hover {
+	
+	text-decoration: underline;
+	
+}
+
+.back, .group {
+	
+	background-color: inherit;
+	
+	color: #303030;
+	
+	font-style: italic;
+	
+	font-weight: 100;
+	
+	font-variant: normal;
+	
+	text-decoration: none;
+	
+	font-size: 18pt;
+	
+}
+
+.back:hover, .group:hover {
+	
+	text-decoration: none;
+	
+}
+
+.group:hover .title {
+	
+	text-decoration: underline;
+	
+}
+
+.group img {
+	
+	display: block;
+	
+	margin: auto;
+	
+	border: 1px solid black;
+	
+}
+
+.group {
+	
+	display: block;
+	
+	height: 10em;
+	
+}
+
+.group .image-holder {
+	
+	position: relative;
+	
+	width: 100%;
+	
+	height: 80%;
+	
+}
+
+.group .image-holder img {
+	
+	max-width: 90%;
+	
+	max-height: 90%;
+	
+	top: 0;
+	
+	left: 0;
+	
+	right: 0;
+	
+	bottom: 0;
+	
+	position: absolute;
+	
+}
+
+.group span {
+	
+	margin-top: 0.125em;
+	
+	text-align: center;
+	
+	font-size: 0.65em;
+	
+	color: #363636;
+	
+	display: block;
+	
+}

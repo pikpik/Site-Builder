@@ -1,0 +1,64 @@
+AddType x-mapp-php5 .php
+
+<IfModule mod_rewrite.c>
+	
+	RewriteEngine on
+	
+	# For Production, not Development
+	#RewriteBase /
+	
+	RewriteOptions Inherit
+	RewriteCond %{HTTP:accept-encoding} (gzip.*)
+	RewriteCond %{REQUEST_FILENAME} !.+\.gz$
+	RewriteCond %{REQUEST_FILENAME}.gz -f
+	RewriteRule ^(.*)$ $1.gz [QSA,L]
+	
+	<FilesMatch ".html.gz$">
+		
+		Header set Content-type "text/html; charset=utf-8"
+		Header set Content-encoding "gzip"
+		
+	</FilesMatch>
+	
+	<FilesMatch ".css.gz$">
+		
+		Header set Content-type "text/css; charset=utf-8"
+		Header set Content-encoding "gzip"
+		
+	</FilesMatch>
+	
+	<FilesMatch ".js.gz$">
+		
+		Header set Content-type "application/x-javascript; charset=utf-8"
+		Header set Content-encoding "gzip"
+		
+	</FilesMatch>
+	
+	<FilesMatch ".png.gz$">
+		
+		Header set Content-type "image/png"
+		Header set Content-encoding "gzip"
+		
+	</FilesMatch>
+	
+	<FilesMatch ".jpg.gz$">
+		
+		Header set Content-type "image/jpeg"
+		Header set Content-encoding "gzip"
+		
+	</FilesMatch>
+	
+</IfModule>
+
+<IfModule mod_headers.c>
+	
+	<FilesMatch ".html(.gz?)$">
+		Header set Cache-Control "no-cache"
+	</FilesMatch>
+	
+	<FilesMatch ".(css|js|jpg|png)(.gz?)$">
+		# Expires after 1 week
+		Header set Cache-Control "public, max-age=604800"
+	</FilesMatch>
+	
+</IfModule>

@@ -1,0 +1,60 @@
+# Stop on errors
+
+set -e
+
+
+# Set up the little framework
+
+basestart="./"
+
+. ${basestart}/base.build_helpers
+
+
+makeResultDirectory "$resultPath"
+
+
+# Save file content
+
+saveAs "$resultPath/$resultName" << __HTML__
+<!doctype html>
+
+<html>
+	
+	<head>
+		
+		$(meta)
+		
+		<style>
+			
+			$( cat ${basestart}/css/base.css )
+			
+			$( cat ${basestart}/css/main-page.css )
+			
+			$( cat ${basestart}/css/mobile.css )
+			
+		</style>
+		
+	</head>
+	
+	<body>
+		
+		$( pageTitle "#" )
+		
+		$( pageCategories "" "index" )
+		
+		<a href="gallery/" id="main-image">
+			
+			<img src="gallery/images/extralarge/$( getGalleryItemProperty "Cloudscape" "filename" )" title="$( getGalleryItemProperty "Cloudscape" "title" ), $( getGalleryItemProperty "Cloudscape" "size" ), by Example" />
+			
+			<div class="title">$( getGalleryItemProperty "Cloudscape" "title" )</div>
+			
+			<div class="size">$( getGalleryItemProperty "Cloudscape" "size" )</div>
+			
+		</a>
+		
+		$(GoogleAnalytics)
+		
+	</body>
+	
+</html>
+__HTML__

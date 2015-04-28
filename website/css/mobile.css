@@ -1,0 +1,191 @@
+@media (max-width: 599px) {
+	
+	body {
+		
+		font-size: 11vw;
+		
+		margin: 1% auto;
+		
+		padding: 0;
+		
+		width: 98%;
+		
+	}
+	
+	h1 {
+		
+		width: 100%;
+		
+		font-size: 1.25em;
+		
+		padding-left: 4.5vw;
+		
+		margin-top: 0em;
+		
+		margin-bottom: 0.45em;
+		
+	}
+	
+	h1 div {
+		
+		margin-left: 0;
+		
+		font-size: 0.6em;
+		
+	}
+	
+	#menu {
+		
+		display: block;
+		
+		width: 98%;
+		
+		margin: auto 1%;
+		
+		margin-bottom: 1em;
+		
+		font-size: 0.6em;
+		
+	}
+	
+	#menu a {
+		
+		display: inline-block;
+		
+		margin-bottom: 0.25em;
+		
+	}
+	
+	#main-image {
+		
+		width: 94%;
+		
+		margin-left: 2.5%;
+		
+		padding-bottom: 6%;
+		
+		font-size: 0.8em;
+		
+	}
+	
+	#main-image div {
+		
+		font-size: 1em;
+		
+	}
+	
+	p {
+		
+		font-size: 0.6em;
+		
+		line-height: 1.35em;
+		
+		margin: auto 2%;
+		
+		padding-bottom: 1em;
+		
+	}
+	
+	table {
+		
+		margin: auto 1%;
+		
+	}
+	
+	td {
+		
+		font-size: 0.6em !important;
+		
+		white-space: initial !important;
+		
+	}
+	
+	.group {
+		
+		margin-bottom: 0.25em;
+		
+	}
+	
+	.group span {
+		
+		font-size: 1em;
+		
+	}
+	
+	.groupName {
+		
+		font-size: 0.8em;
+		
+		margin-top: 1em;
+		
+		margin-bottom: 0.5em;
+		
+	}
+	
+	.small {
+		
+		margin: 0em auto;
+		
+		display: block;
+		
+		font-size: 1em;
+		
+		width: 100%;
+		
+	}
+	
+	.large {
+		
+		max-width: 98%;
+		
+		margin-bottom: 1em;
+		
+		padding-bottom: 1.3em;
+		
+	}
+	
+	.large img {
+		
+		max-width: 98%;
+		
+		margin-bottom: 1em;
+		
+	}
+	
+	.large i {
+		
+		font-size: 1.1em;
+		
+	}
+	
+	.large span {
+		
+		font-size: 1em;
+		
+	}
+	
+	label {
+		
+		font-size: 0.7em;
+		
+		width: 98%;
+		
+		margin-left: 4%;
+		
+		text-align: left;
+		
+		padding-bottom: 3.5em;
+		
+		padding-top: 0.5em;
+		
+		margin-bottom: -1em;
+		
+	}
+	
+	label a {
+		
+		width: 100%;
+		
+	}
+	
+}

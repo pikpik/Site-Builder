@@ -1,0 +1,73 @@
+# Stop on errors
+
+set -e
+
+
+# Set up the little framework
+
+basestart="../"
+
+. ${basestart}/base.build_helpers
+
+
+makeResultDirectory "$resultPath"
+
+# Save file content
+
+saveAs "$resultPath/$resultName" << __HTML__
+<!doctype html>
+
+<html>
+	
+	<head>
+		
+		$(meta)
+		
+		<style>
+			
+			$( cat ${basestart}/css/base.css )
+			
+			$( cat ${basestart}/css/contact-page.css )
+			
+			$( cat ${basestart}/css/mobile.css )
+			
+		</style>
+		
+		<script>
+			
+			$( cat ${basestart}/js/base.js )
+			
+			$( cat ${basestart}/js/contact-page.js )
+			
+		</script>
+		
+	</head>
+	
+	<body>
+		
+		$( pageTitle "../" )
+		
+		$( pageCategories "../" "contact" )
+		
+		<label>
+			
+			Email
+			
+			<a class="email-address" data-characters="e,x,a,m,p,l,e,e,x,a,m,p,l,e,.,c,@,o,m" data-positions="0,1,2,3,4,5,6,8,9,10,11,12,13,14,15,16,7,17,18">example</a>
+			
+		</label>
+		
+		<label>
+			
+			Twitter
+			
+			<a href="http://twitter.com/Example" target="_blank">@Example</a>
+			
+		</label>
+		
+		$(GoogleAnalytics)
+		
+	</body>
+	
+</html>
+__HTML__

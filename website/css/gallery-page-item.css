@@ -1,0 +1,105 @@
+body {
+	
+	background-color: #65704F;
+	
+}
+
+.back {
+	
+	position: absolute;
+	
+	left: 2em;
+	
+	font-size: 0.65em;
+	
+	color: #c0b332;
+	
+	display: block;
+	
+	top: 0.3em;
+	
+}
+
+.back:hover {
+	
+	text-decoration: underline;
+	
+}
+
+.back, .large {
+	
+	background-color: inherit;
+	
+	color: #303030;
+	
+	font-style: italic;
+	
+	font-weight: 100;
+	
+	font-variant: normal;
+	
+	text-decoration: none;
+	
+	font-size: 18pt;
+	
+}
+
+.back:hover, .large:hover {
+	
+	text-decoration: none;
+	
+}
+
+.large:hover .title {
+	
+	text-decoration: underline;
+	
+}
+
+.large img {
+	
+	display: block;
+	
+	margin: auto;
+	
+	border: 1px solid black;
+	
+	max-width: 90%;
+	
+}
+
+.large {
+	
+	display: block;
+	
+	margin: auto;
+	
+	width: inherit;
+	
+	margin-top: 1.5em;
+	
+	margin-bottom: 1.5em;
+	
+	text-align: center;
+	
+	line-height: 1.25em;
+	
+	font-style: normal;
+	
+	font-size: 15pt;
+	
+}
+
+.large img {
+
+	margin-bottom: 2em;
+
+}
+
+.large span {
+	
+	font-size: 12pt;
+	
+	display: block;
+	
+}
