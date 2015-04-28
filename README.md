@@ -6,7 +6,7 @@ Build static sites made of pure awesome.
 
 * sh (POSIX-compatible shell)
 * gzip (for compression)
-* Node.js
+* Node.js (for parsing JSON)
 
 ## Directions
 
